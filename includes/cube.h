@@ -6,7 +6,7 @@
 /*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/03/14 04:53:20 by copihendo        ###   ########.fr       */
+/*   Updated: 2021/03/23 16:39:15 by copihendo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct  s_junk
 	char **lines;
 	char **words;
 	char **kit;
+	size_t *max_width;
 }               t_junk;
 
 
@@ -52,16 +53,7 @@ typedef struct s_textures
 	t_image 	s;	
 }		t_textures;
 
-typedef struct  s_base
-{
-	t_junk 		junk;
-	int 		width_screen;
-	int 		height_screen;
-	t_textures	textures;		
-	t_color 	floor;
-	t_color 	ceil;
-	void 		*mlx_ptr;
-}               t_base;
+
 
 typedef struct s_player
 {
@@ -76,6 +68,27 @@ typedef struct s_map
 	int height;
 	char *data;
 }				t_map;
+
+
+
+
+
+
+
+
+
+typedef struct  s_base
+{
+	t_junk 		junk;
+	int 		width_screen;
+	int 		height_screen;
+	t_textures	textures;		
+	t_color 	floor;
+	t_color 	ceil;
+	t_map		map;
+	t_player	player;
+	void 		*mlx_ptr;
+}               t_base;
 
 char *ft_read_file(const char *path);
 

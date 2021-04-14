@@ -6,7 +6,7 @@
 /*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:46:29 by copihendo         #+#    #+#             */
-/*   Updated: 2021/03/14 00:49:23 by copihendo        ###   ########.fr       */
+/*   Updated: 2021/03/17 17:53:14 by copihendo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void ft_handle_line(t_base *base)
 		if(ft_check_config(base))
 			ft_read_config(line);
 		else 
-			ft_read_map(line);
+			ft_read_map(base, line);
 		num_lines++;
 	}
 }
