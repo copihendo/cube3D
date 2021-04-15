@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/15 20:08:37 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:29:05 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUBE_H
 # include <stdlib.h>
 # include <fcntl.h>
-# include "libft.h"
 # include "mlx.h"
+// # include "libft.h"
 # define BUFFER_SIZE 1024
 
 typedef struct  s_junk

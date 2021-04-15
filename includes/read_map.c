@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 04:54:33 by copihendo         #+#    #+#             */
-/*   Updated: 2021/03/24 23:45:53 by copihendo        ###   ########.fr       */
+/*   Updated: 2021/04/15 20:23:44 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	*ft_transform_map(t_base *base, char **lines)
 					ft_exit(base);
 				base->player.y = y + 0.5;
 				base->player.x = x + 0.5;
-				base->plater.direct = (float)(ptr - dir) / 4;
+				base->player.direct = (float)(ptr - dir) / 4;
 				arr[x + y * base->map.width] = '0';
 			}	//проверка что вообще есть игрок надо делать?
 			else if (ft_strchr("012", cell))
