@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/15 20:08:37 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/16 15:17:40 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ typedef struct s_map
 }				t_map;
 
 
-
-
-
-
-
+////////////			BASE				//////////
 
 
 typedef struct  s_base

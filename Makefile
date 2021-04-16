@@ -2,7 +2,7 @@ NAME = cub3D
 SRCDIR = ./src/
 # SRCDIR_B = ./src_bonus/
 MLXDIR = ./mlx/
-LIBFTDIR = ./tools/libft/
+# LIBFTDIR = ./libft/
 INCLD_MLX = -I $(MLXDIR)
 # INCLD_LIBFT = -I ./libft/includes/
 HEADER = ./includes/cube.h
@@ -11,8 +11,7 @@ INCLD = -I ./includes
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror $(INCLD) $(INCLD_MLX) -O3 -MD
 
-FILES_CUB3D = main.c lstadd_back_content.c mlx_init.c exit.c \
-1_parse.c 2_read_file.c check_config.c handle_line.c read_config.c read_map.c screen_size.c
+FILES_CUB3D = main.c
 
 # FILES_CUB3D = ft_cub_utils.c main.c ft_map_create.c ft_param_parser.c \
 # 			ft_parser_utils.c ft_drawing.c ft_drawing_utils.c ft_mlx.c		\
