@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/16 15:17:40 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/16 19:30:41 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUBE_H
 # include <stdlib.h>
 # include <fcntl.h>
-# include "libft.h"
+# include "../tools/libft/libft.h"
 # include "mlx.h"
 # define BUFFER_SIZE 1024
 
@@ -87,6 +87,22 @@ typedef struct  s_base
 	void 		*mlx_ptr;
 }               t_base;
 
-char *ft_read_file(const char *path);
+char	*ft_read_file(const char *path);
+void    ft_parse(t_base *base, const char *path);
+char	*ft_read_file(const char *path);
+int		ft_check_config(t_base base);
+void	ft_handle_line(t_base *base);
+void	ft_handle_textures(t_base *base);
+int		ft_color_atoi(t_base *base, char *kit);
+void	ft_parse_color(t_base *base, t_color *color);
+void	ft_read_config(t_base *base);
+void	ft_find_max_width(t_base *base, char **lines);
+void	*ft_transform_map(t_base *base, char **lines);
+int		ft_check_map(t_base *base);
+// int		ft_read_map(t_base *base, t_list *list, char *line);
+int		ft_read_map(t_base *base, char *line);
+t_list	*ft_lstadd_back_content(t_list **list, void *content);
+int		ft_exit(t_base *base);
+
 
 #endif

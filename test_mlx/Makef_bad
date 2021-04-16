@@ -1,10 +1,10 @@
 NAME = cub3D
-SRCDIR = ./src/
+SRCDIR = ./src/ ./src/parsing/
 # SRCDIR_B = ./src_bonus/
 MLXDIR = ./mlx/
 LIBFTDIR = ./tools/libft/
 INCLD_MLX = -I $(MLXDIR)
-# INCLD_LIBFT = -I ./libft/includes/
+INCLD_LIBFT = -I ./tools/libft/includes/
 HEADER = ./includes/cube.h
 INCLD = -I ./includes
 
@@ -32,8 +32,12 @@ D_FILES = $(SRC_CUB3D:.c=.d)
 
 all: $(NAME)
 
+# $(NAME): $(OBJS) | tools
+# 		$(CC) $(CFLAGS) $(OBJS) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+# include $(wildcard $(D_FILES))
+
 $(NAME): $(OBJS) | tools
-		$(CC) $(CFLAGS) $(OBJS) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+		$(CC) $(CFLAGS) -L$(LIBFTDIR) -lft $(OBJS) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 include $(wildcard $(D_FILES))
 
 # bonus: fclean $(OBJS_B) | tools

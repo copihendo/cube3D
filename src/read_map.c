@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 04:54:33 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/16 19:30:22 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/16 18:11:51 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_check_map(t_base *base)							// проверка карты
 // }
 
 
-int ft_read_map(t_base *base, char *line)
+int ft_read_map(t_base *base, t_list *list, char *line)
 {
 	ft_find_max_width(base, line);
 	ft_transform_map(base, line);

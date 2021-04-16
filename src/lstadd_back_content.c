@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lstadd_back_content.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 05:20:57 by copihendo         #+#    #+#             */
-/*   Updated: 2021/03/19 20:31:38 by copihendo        ###   ########.fr       */
+/*   Updated: 2021/04/16 18:54:21 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-ft_lstadd_back_content(t_list **list, void *content)
+t_list *ft_lstadd_back_content(t_list **list, void *content)
 {
 	t_list *last;
 	t_list *new;

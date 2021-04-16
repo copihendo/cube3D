@@ -2,16 +2,17 @@ NAME = cub3D
 SRCDIR = ./src/
 # SRCDIR_B = ./src_bonus/
 MLXDIR = ./mlx/
-# LIBFTDIR = ./libft/
+LIBFTDIR = ./tools/libft/
 INCLD_MLX = -I $(MLXDIR)
-# INCLD_LIBFT = -I ./libft/includes/
+INCLD_LIBFT = -I ./tools/libft/includes/
 HEADER = ./includes/cube.h
 INCLD = -I ./includes
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror $(INCLD) $(INCLD_MLX) -O3 -MD
 
-FILES_CUB3D = main.c
+FILES_CUB3D = main.c lstadd_back_content.c mlx_init.c exit.c \
+1_parse.c 2_read_file.c check_config.c handle_line.c read_config.c read_map.c screen_size.c
 
 # FILES_CUB3D = ft_cub_utils.c main.c ft_map_create.c ft_param_parser.c \
 # 			ft_parser_utils.c ft_drawing.c ft_drawing_utils.c ft_mlx.c		\
@@ -31,8 +32,12 @@ D_FILES = $(SRC_CUB3D:.c=.d)
 
 all: $(NAME)
 
+# $(NAME): $(OBJS) | tools
+# 		$(CC) $(CFLAGS) $(OBJS) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+# include $(wildcard $(D_FILES))
+
 $(NAME): $(OBJS) | tools
-		$(CC) $(CFLAGS) $(OBJS) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+		$(CC) $(CFLAGS) -L$(LIBFTDIR) -lft $(OBJS) -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 include $(wildcard $(D_FILES))
 
 # bonus: fclean $(OBJS_B) | tools
