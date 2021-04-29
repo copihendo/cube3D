@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 22:26:54 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/16 18:36:07 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/29 21:46:54 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@ void	ft_parse(t_base *base, const char *path)
 {
 	if(!(base->junk.file = ft_read_file(path)))
 		ft_exit(base);
-	ft_handle_line(base); 
+	ft_handle_line(base);
+	write(1, "parse_finish\n", 13);
 }

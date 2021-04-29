@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 04:54:33 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/16 18:11:51 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:25:18 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	ft_check_map(t_base *base)							// проверка карты
 		}
 		i++;
 	}
+	return(0);
 }
 
 // int (base, y ,x )
@@ -84,11 +85,10 @@ int	ft_check_map(t_base *base)							// проверка карты
 // 	return(-1);
 // }
 
-
-int ft_read_map(t_base *base, t_list *list, char *line)
+int ft_read_map(t_base *base, char *line)
 {
-	ft_find_max_width(base, line);
-	ft_transform_map(base, line);
+	ft_find_max_width(base, &line);
+	ft_transform_map(base, &line);
 	
 	// while (line = base->junk.lines[num_lines])
 	// {
@@ -106,5 +106,6 @@ int ft_read_map(t_base *base, t_list *list, char *line)
 	// 		ft_lstadd_back_content(begin_list, )
 	// 	}
 	// }
-	ft_extans_map();
+	// ft_extans_map();
+	return(0);
 }

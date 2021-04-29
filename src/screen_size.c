@@ -6,17 +6,17 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 01:40:26 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/16 18:41:44 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:26:11 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-ft_screen_size(t_base *base)
-{
-	// сделать проверку существования аргументов [0-2], если не совпалдает вызвать ft_exit
+// ft_screen_size(t_base *base)
+// {
+// 	// сделать проверку существования аргументов [0-2], если не совпалдает вызвать ft_exit
 
-	base->width_screen = base->junk.lines[1]; 
-	base->height_screen = base->junk.lines[2]; 
-}
+// 	base->width_screen = base->junk.lines[1]; 
+// 	base->height_screen = base->junk.lines[2]; 
+// }
 

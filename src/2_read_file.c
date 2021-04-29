@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_file.c                                        :+:      :+:    :+:   */
+/*   2_read_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:02:08 by copihendo         #+#    #+#             */
-/*   Updated: 2021/03/13 23:22:03 by copihendo        ###   ########.fr       */
+/*   Updated: 2021/04/29 21:32:16 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ char *ft_read_file(const char *path)
 	if ((fd = open(path, O_RDONLY)) == -1)
 		return (0);
 	res = ft_strdup("");
+	write(1, "read_fil1\n", 10);
 	while (res && (cnt_byte = read(fd, buffer, BUFFER_SIZE - 1)))
 	{
 		buffer[cnt_byte] = '\0';
 		for_free = res;
 		res = ft_strjoin(res, buffer);
 		free(for_free);
+		write(1, "read_fil2\n", 10);
 	}
 	close(fd);
 	return (res);

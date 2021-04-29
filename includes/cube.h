@@ -6,17 +6,20 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/16 19:30:41 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:21:09 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
 # define CUBE_H
 # include <stdlib.h>
+# include <stdio.h>
 # include <fcntl.h>
-# include "../tools/libft/libft.h"
+# include "libft.h"
 # include "mlx.h"
 # define BUFFER_SIZE 1024
+// # define keycode 76
+
 
 typedef struct  s_junk
 {
@@ -65,8 +68,10 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	int width;
-	int height;
+	// int width;
+	size_t width;
+	// int height;
+	size_t height;
 	char *data;
 }				t_map;
 
@@ -84,7 +89,9 @@ typedef struct  s_base
 	t_color 	ceil;
 	t_map		map;
 	t_player	player;
+	// void 		*mlx_ptr;
 	void 		*mlx_ptr;
+	void 		*mlx_win;
 }               t_base;
 
 char	*ft_read_file(const char *path);
