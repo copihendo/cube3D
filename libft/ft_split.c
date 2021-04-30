@@ -6,68 +6,132 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 19:23:56 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/21 17:49:59 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:47:24 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_strcount(char const *s, char c)
+// static size_t	ft_strcount(char const *s, char c)
+// {
+// 	size_t i;
+
+// 	i = 0;
+// 	while (*s++)
+// 		if (*s != c && (*(s + 1) == c || *(s + 1) == '\0'))
+// 			i++;
+// 	return (i);
+// }
+
+// static size_t	ft_strlen_c(char const *s, char c)
+// {
+// 	size_t i;
+
+// 	i = 0;
+// 	while (s[i] && s[i] != c)
+// 		i++;
+// 	return (i);
+// }
+
+// static void		ft_free(char **p)
+// {
+// 	size_t i;
+
+// 	i = 0;
+// 	while (p[i])
+// 		free(p[i++]);
+// 	free(p);
+// }
+
+// char			**ft_split(char const *s, char c)
+// {
+// 	size_t	wc;
+// 	size_t	i;
+// 	char	**arr;
+
+// 	if (!s)
+// 		return (NULL);
+// 	wc = ft_strcount(s, c);
+// 	if (!(arr = (char **)ft_calloc(wc + 1, sizeof(char *))))
+// 		return (NULL);
+// 	i = 0;
+// 	while (*s && i < wc)
+// 	{
+// 		while (*s && *s == c)
+// 			s++;
+// 		if (*s == '\0')
+// 			break ;
+// 		arr[i] = ft_substr(s, 0, ft_strlen_c(s, c));
+// 		if (arr[i++] == NULL)
+// 		{
+// 			ft_free(arr);
+// 			return (NULL);
+// 		}
+// 		s += ft_strlen_c(s, c);
+// 	}
+// 	return (arr);
+// }
+
+
+static size_t	ft_nword(const char *s, char c)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while (*s++)
+	while (*s != '\0')
+	{
 		if (*s != c && (*(s + 1) == c || *(s + 1) == '\0'))
 			i++;
+		s++;
+	}
 	return (i);
 }
 
-static size_t	ft_strlen_c(char const *s, char c)
+static size_t	ln(const char *s, char c)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while (s[i] && s[i] != c)
+	while (s[i] != '\0' && s[i] != c)
 		i++;
 	return (i);
 }
 
-static void		ft_free(char **p)
+static void		ft_clean(char **s)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while (p[i])
-		free(p[i++]);
-	free(p);
+	while (s[i++])
+		free(s[i]);
+	free(s);
 }
 
 char			**ft_split(char const *s, char c)
 {
-	size_t	wc;
+	char	**dst;
 	size_t	i;
-	char	**arr;
+	size_t	n;
+	size_t	j;
 
-	if (!s)
-		return (NULL);
-	wc = ft_strcount(s, c);
-	if (!(arr = (char **)ft_calloc(wc + 1, sizeof(char *))))
-		return (NULL);
+	n = -1;
 	i = 0;
-	while (*s && i < wc)
+	if (!s || !(dst = ((char **)malloc(sizeof(char *) * (ft_nword(s, c) + 1)))))
+		return (NULL);
+	while (++n < (ft_nword(s, c)))
 	{
-		while (*s && *s == c)
-			s++;
-		if (*s == '\0')
-			break ;
-		arr[i] = ft_substr(s, 0, ft_strlen_c(s, c));
-		if (arr[i++] == NULL)
+		j = 0;
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		if (!(dst[n] = ((char *)malloc(sizeof(char) * ((ln(&s[i], c)) + 1)))))
 		{
-			ft_free(arr);
+			ft_clean(dst);
 			return (NULL);
 		}
-		s += ft_strlen_c(s, c);
+		while (s[i] != c && s[i] != '\0')
+			dst[n][j++] = s[i++];
+		dst[n][j] = '\0';
 	}
-	return (arr);
+	dst[n] = NULL;
+	return (dst);
 }

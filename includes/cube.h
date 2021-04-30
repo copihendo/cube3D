@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/29 20:21:09 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:10:24 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void	ft_handle_line(t_base *base);
 void	ft_handle_textures(t_base *base);
 int		ft_color_atoi(t_base *base, char *kit);
 void	ft_parse_color(t_base *base, t_color *color);
-void	ft_read_config(t_base *base);
+// void	ft_read_config(t_base *base);
+void ft_read_config(t_base *base, char *str);
 void	ft_find_max_width(t_base *base, char **lines);
 void	*ft_transform_map(t_base *base, char **lines);
 int		ft_check_map(t_base *base);
