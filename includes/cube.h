@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/04/30 20:10:24 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:48:53 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ typedef struct s_image
 		t_color *color;
 		void 	*link;
 		int 	width;
-		int 	height;	
+		int 	height;
+		int		bits_pix;
+		int		line_len;
+		int		endian;
 }				t_image;
 
 typedef struct s_textures
@@ -97,7 +100,7 @@ typedef struct  s_base
 char	*ft_read_file(const char *path);
 void    ft_parse(t_base *base, const char *path);
 char	*ft_read_file(const char *path);
-int		ft_check_config(t_base base);
+int		ft_check_config(t_base *base);
 void	ft_handle_line(t_base *base);
 void	ft_handle_textures(t_base *base);
 int		ft_color_atoi(t_base *base, char *kit);
@@ -108,7 +111,7 @@ void	ft_find_max_width(t_base *base, char **lines);
 void	*ft_transform_map(t_base *base, char **lines);
 int		ft_check_map(t_base *base);
 // int		ft_read_map(t_base *base, t_list *list, char *line);
-int		ft_read_map(t_base *base, char *line);
+int		ft_read_map(t_base *base, char **line);
 t_list	*ft_lstadd_back_content(t_list **list, void *content);
 int		ft_exit(t_base *base);
 
