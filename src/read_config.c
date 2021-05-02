@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 00:42:08 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/01 16:33:48 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:09:50 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,6 @@ void ft_screen_size(t_base *base)
 // 	base->height_screen = base->junk.lines[2]; 
 }
 
-
-// void ft_read_config(t_base *base)
 void ft_read_config(t_base *base, char *str)
 {
 	char *tag;

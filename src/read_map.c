@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 04:54:33 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/01 18:02:24 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:46:14 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,18 @@ void	ft_find_max_width(t_base *base, char **lines)
 	while ((line = lines[base->map.height]) && base->map.height < 70)
 	{
 		// line = lines[base->map.height];
-		printf("width %zu\n", base->map.width);
-		printf("height %zu\n", base->map.height);
-		printf("line %s\n", line);
+		// printf("width %zu\n", base->map.width);
+		// printf("height %zu\n", base->map.height);
+		// printf("line %s\n", line);
 		width = ft_strlen(line);
-		printf("width_ftstrlen %zu\n", width);
+		// printf("width_ftstrlen %zu\n", width);
 		// printf("LEN %s\n", line);
 		if (width > base->map.width)
 			base->map.width = width;
 		base->map.height++;
 	}
-	printf("%zu\n", base->map.width);
+	printf("FINAL width %zu\n", base->map.width);
+	printf("FINAL height %zu\n", base->map.height);
 }
 
 void	*ft_transform_map(t_base *base, char **lines)  // функция преобразует карту, 
@@ -42,19 +43,19 @@ void	*ft_transform_map(t_base *base, char **lines)  // функция преоб
 	char *ptr;
 	static char *dir = "NWSE"; // указатель на direction для упрощения обработки карты
 
-	printf("transform map start\n");
+	// printf("transform map start\n");
 	if (!(base->map.data = ft_calloc(base->map.width * base->map.height + 1, 1)))
 		ft_exit(base);
-	printf("size calloc %lu\n", base->map.width * base->map.height + 1);
-	printf("transform map make calloc\n");
-	printf("map.data %s\n", base->map.data);
+	// printf("size calloc %lu\n", base->map.width * base->map.height + 1);
+	// printf("transform map make calloc\n");
+	// printf("map.data %s\n", base->map.data);
 	// write(1, &base->map.data, 70);
 	y = 0;
 	while(y < base->map.height)
 	// while(y < 10)
 	// while(lines[y])
 	{
-		printf("lines %s\n", lines[y]);
+		// printf("lines %s\n", lines[y]);
 		x = 0;
 		while(lines[y][x]) // в конце запишется \0 в х и вайл оборвется
 		// while(x < base->map.width) // в конце запишется \0 в х и вайл оборвется
@@ -77,15 +78,11 @@ void	*ft_transform_map(t_base *base, char **lines)  // функция преоб
 		}
 		y++;
 	}
-	int i = 0;
-	while (i++ < 463)
-		printf("%c", base->map.data[i]);
-	// printf("\n\nmap.data CHAR %c\n\n", base->map.data[i]);
 	printf("transform map end\n");
 	return(0);
 }
 
-int	ft_check_map(t_base *base)							// проверка карты
+int		ft_check_map(t_base *base)							// проверка карты
 {
 	size_t i;
 	size_t length;
@@ -105,20 +102,20 @@ int	ft_check_map(t_base *base)							// проверка карты
 	return(0);
 }
 
-// int (base, y ,x )
-// {	
-// 	return(cell = line y x)
-// 	return(-1);
-// }
-
-int ft_read_map(t_base *base, char **line)
+int		ft_read_map(t_base *base, char **line)
 {
-	printf("%zu\n", base->map.height);
+	// printf("%zu\n", base->map.height);
 	ft_find_max_width(base, line);
 	printf("enter to transform map start\n");
 	ft_transform_map(base, line);
 	if(ft_check_map(base) == -1)
 		printf("invalid structure map do not change");
+	return(0);
+}
+
+
+
+
 	// while (line = base->junk.lines[num_lines])
 	// {
 	// 	if ((width = ft_strlen(line)) > base->junk.max_width) // в теории можно обойтись без цшвек в junk
@@ -136,5 +133,3 @@ int ft_read_map(t_base *base, char **line)
 	// 	}
 	// }
 	// ft_extans_map();
-	return(0);
-}

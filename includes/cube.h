@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/01 15:48:53 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:32:40 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct  s_junk
 
 typedef struct	s_color
 {
-	char 		flag;
+	char 			flag;
 	unsigned char 		R;
 	unsigned char 		G;
 	unsigned char 		B;
@@ -42,8 +42,9 @@ typedef struct	s_color
 
 typedef struct s_image
 {
-		t_color *color;
 		void 	*link;
+		t_color *color;
+		char 	*addr;
 		int 	width;
 		int 	height;
 		int		bits_pix;
@@ -57,7 +58,8 @@ typedef struct s_textures
 	t_image		so;			
 	t_image 	we;			
 	t_image 	ea;			
-	t_image 	s;	
+	t_image 	s;
+	t_image		screen;	
 }		t_textures;
 
 
