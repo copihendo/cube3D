@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 22:26:54 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/02 12:47:06 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/03 20:06:41 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void ft_handle_line(t_base *base)
 	ft_read_map(base, base->junk.lines + i);
 		write(1, "end_read_map\n", 13);	
 }
-
 
 void	ft_parse(t_base *base, const char *path)
 {

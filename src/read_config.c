@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 00:42:08 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/01 18:09:50 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/03 19:43:00 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ static void		ft_free(char **p)
 	free(p);
 }
 
+int ft_check_link(t_base *base)
+{
+	int i; 
+	static char *ext = ".xpm";
+
+	i = ft_strlen(base->junk.words[1]) - 4;
+	while(base->junk.words[1][i] != '\0')
+	{
+		if (ft_strchr(ext, base->junk.words[1][i])) // проверить что все файлф заканчиваются на .xpm
+			i++;
+		else
+			return (-1);
+	}
+	return (0);
+}
+
 void	ft_parse_texture(t_base *base, t_image *texture)
 {
 	//texture = base->junk.words[1];
@@ -31,20 +47,18 @@ void	ft_parse_texture(t_base *base, t_image *texture)
 		write(1, "parse_texture_error\n", 20);
 		ft_exit(base); 
 	}
+	if(ft_check_link(base) == -1)
+	{
+		write(1, "invalid extension of texture\n", 29); // оу щит, эта проверка не нужна была..... mlx_xpm и так ее проверяет
+		ft_exit(base);
+	} 
 	// texture->color = (t_color *)mlx_get_data_addr(texture->link, &texture->bits_pix, &texture->line_len, &texture->endian);
 	texture->color = (t_color *)mlx_get_data_addr(texture->link, &n, &n, &n);
 	if(!texture->color)
 		ft_exit(base);
-
 // если линк нуль терминатор вызвать экзит
 //проверить и вывести ошибку если есть, или стандратное закытие программы. 
 }
-
-// void ft_handle_textures(t_base *base)
-// {
-	
-// }
-
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

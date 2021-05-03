@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 04:54:33 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/02 12:46:14 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/03 20:09:06 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	*ft_transform_map(t_base *base, char **lines)  // функция преоб
 			cell = lines[y][x];
 			if ((ptr = ft_strchr(dir, cell))) 	// аналогия lines[i] == 'N' || lines[i] == 'W' || lines[i] == 'S' || lines[i] == 'E')
 			{
-				if (!(base->player.x == 0 && base->player.y == 0)) //  проверка, что конфиг для игрока чистый, т.е. игрок проверяется первый раз, иначе не валидная карта
+				if (!(base->player.xx == 0 && base->player.yy == 0)) //  проверка, что конфиг для игрока чистый, т.е. игрок проверяется первый раз, иначе не валидная карта
 					ft_exit(base);
-				base->player.y = y + 0.5;									// записываем начальное положение игрока
-				base->player.x = x + 0.5;
+				base->player.yy = y + 0.5;									// записываем начальное положение игрока
+				base->player.xx = x + 0.5;
 				base->player.direct = (float)(ptr - dir) / 4; 				// запись направления в структуру
 				base->map.data[x + y * base->map.width] = '0';  			// заменяем начальное положение игрока на ноль.  
 			}	//проверка что вообще есть игрок надо делать?
@@ -102,12 +102,37 @@ int		ft_check_map(t_base *base)							// проверка карты
 	return(0);
 }
 
+void	ft_direct(t_base *base)
+{
+	if(base->player.direct == 0)
+	{
+		base->player.dir.xx = 0;
+		base->player.dir.yy = 1;
+	}
+	if(base->player.direct == 0.25)
+	{
+		base->player.dir.xx = 1;
+		base->player.dir.yy = 0;
+	}
+	if(base->player.direct == 0.5)
+	{
+		base->player.dir.xx = 0;
+		base->player.dir.yy = -1;
+	}
+	if(base->player.direct == 0.75)
+	{
+		base->player.dir.xx = -1;
+		base->player.dir.yy = 0;
+	}
+}
+
 int		ft_read_map(t_base *base, char **line)
 {
 	// printf("%zu\n", base->map.height);
 	ft_find_max_width(base, line);
 	printf("enter to transform map start\n");
 	ft_transform_map(base, line);
+	ft_direct(base);
 	if(ft_check_map(base) == -1)
 		printf("invalid structure map do not change");
 	return(0);
