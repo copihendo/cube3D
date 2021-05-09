@@ -8,9 +8,11 @@ SRCS =  $(addprefix ./src/,\
 1_parse.c 2_read_file.c read_config.c read_map.c raycast.c moving.c \
         )
 OBJS = $(SRCS:.c=.o)
+
 all: ${NAME}
 debug:      CFLAGS  += -fsanitize=address -g
 debug:      all
+
 $(NAME) :${OBJS} | tools
 		${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS_ADD}
 tools:
@@ -18,6 +20,7 @@ tools:
 	make -C ./mlx/
 clean:
 		rm -f ${OBJS}
+
 fclean: clean
 		rm -f ${NAME}
 re: fclean all

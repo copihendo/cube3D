@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1_parse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 22:26:54 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/03 20:06:41 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:12:50 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_parse(t_base *base, const char *path)
 	// printf("map.height  %zu\n", base->map.height);
 	// printf("base->player.x %f\n", base->player.x);
 	// printf("base->player.y %f\n", base->player.y);
-	// printf("base->player.direct%f\n", base->player.direct);
+	printf("base->player.direct%f\n", base->player.direct);
 	// int i = 0;
 	// while (i++ < 463)
 	// 	printf("%c", base->map.data[i]);

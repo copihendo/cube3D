@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 00:42:08 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/03 19:43:00 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:03:41 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_parse_texture(t_base *base, t_image *texture)
 {
 	//texture = base->junk.words[1];
 	int n;
-	if(!(texture->link = mlx_xpm_file_to_image(base->mlx_ptr, base->junk.words[1], &texture->width, &texture->height)))
+
+	if(!(texture->link = mlx_xpm_file_to_image(base->mlx_ptr, base->junk.words[1], &texture->width, &texture->height )))
 	{	
 		write(1, "parse_texture_error\n", 20);
 		ft_exit(base); 
@@ -53,8 +54,8 @@ void	ft_parse_texture(t_base *base, t_image *texture)
 		ft_exit(base);
 	} 
 	// texture->color = (t_color *)mlx_get_data_addr(texture->link, &texture->bits_pix, &texture->line_len, &texture->endian);
-	texture->color = (t_color *)mlx_get_data_addr(texture->link, &n, &n, &n);
-	if(!texture->color)
+	texture->data = (t_color *)mlx_get_data_addr(texture->link, &n, &n, &n);
+	if(!texture->data)
 		ft_exit(base);
 // если линк нуль терминатор вызвать экзит
 //проверить и вывести ошибку если есть, или стандратное закытие программы. 

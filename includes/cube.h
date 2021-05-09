@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/03 21:23:41 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/11 19:54:33 by copihendo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # define RF 124
 # define esc 53
 
+#define ROT_SPEED 0.01
+
+
+
 typedef struct		s_key
 {
 	char			w;
@@ -37,6 +41,14 @@ typedef struct		s_key
 	char			l;
 	char			r;
 }					t_key;
+typedef struct s_strip
+{
+	int code;
+	float xx;
+	float yy;
+	float dist;
+	float dir;
+}				t_strip;
 
 typedef struct  s_junk
 {
@@ -58,8 +70,7 @@ typedef struct	s_color
 typedef struct s_image
 {
 		void 	*link;
-		t_color *color;
-		char 	*addr;
+		t_color *data;
 		int 	width;
 		int 	height;
 		int		bits_pix;
@@ -88,6 +99,18 @@ typedef	struct		s_fpos
 	float			xx;
 	float			yy;
 }					t_fpos;
+
+typedef struct s_sprite
+{
+	t_fpos pos;
+	float dir;
+	float dist;
+}				t_sprite;
+
+typedef struct s_section
+{
+	t_fpos pos[2];
+}				t_section;
 
 typedef	struct		s_raycast
 {
@@ -118,8 +141,8 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	size_t		width;
-	size_t		height;
+	int		width;
+	int		height;
 	char		*data;
 	// int width;
 	// int height;
@@ -151,6 +174,7 @@ typedef struct  s_base
 	t_raycast	rcst;
 	t_key		key;
 	int 		flag_bmp;
+	t_list		*sprite;
 }               t_base;
 
 char	*ft_read_file(const char *path);
@@ -170,11 +194,14 @@ int		ft_check_map(t_base *base);
 int		ft_read_map(t_base *base, char **line);
 t_list	*ft_lstadd_back_content(t_list **list, void *content);
 int		ft_exit(t_base *base);
-int		ft_impact(t_base *base, float xx, float yy);
+char		ft_impact(t_base *base, int xx, int yy);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_mlx(t_base *base);
 int		ft_key_in(int keycode, t_base *base);
 int		ft_key_out(int keycode, t_base *base);
+void	ft_check_keys(t_base *base);
+void	ft_raycast(t_base *base, t_strip *strip);
+float	ft_to_diap(float val);
 
 
 #endif

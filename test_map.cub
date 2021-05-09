@@ -1,0 +1,15 @@
+R 1000 600
+NO ./textures/no_textures.xpm
+SO ./textures/krest.xpm
+WE ./textures/tv.xpm
+EA ./textures/ea_textures.xpm
+S ./textures/no_textures.xpm
+F 100,100,0
+C 225,30,0
+1111111
+1000001
+1000001
+100N001
+1000001
+1000001
+1111111

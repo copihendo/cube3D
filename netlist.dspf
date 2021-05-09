@@ -1,0 +1,116 @@
+*|DSPF 1.5
+
+* Nominal Temperature: 25C
+* Circuit Temperature: 25C
+*
+
+.subckt wired_arches_LLL_XYZ_opt3  SH__ SNS1-__ SNS0+__ SNS0-__ MID0__ SNS2-__
++ SNS2+__ MID2__ MID1__ SNS1+__
+* 
+* SNS1+__	SNS1+__
+* MID1__	MID1__
+* MID2__	MID2__
+* SNS2+__	SNS2+__
+* SNS2-__	SNS2-__
+* MID0__	MID0__
+* SNS0-__	SNS0-__
+* SNS0+__	SNS0+__
+* SNS1-__	SNS1-__
+* SH__	SH__
+*|GROUND_NET 0
+*
+* Net Section
+*
+*|NET SH__ 0
+*|P (SH__ X 0.0)
+*|I (X0:pad X0 pad B 0.0)
+*|I (X1:pad X1 pad B 0.0)
+*|I (X2:pad X2 pad B 0.0)
+*|I (X3:pad X3 pad B 0.0)
+*|I (X7:pad X7 pad B 0.0)
+*|I (X14:pad X14 pad B 0.0)
+R1 X14:pad SH__ 30.0942
+R2 SH__ X0:pad 0.01
+R3 SH__ X1:pad 0.01
+R4 SH__ X2:pad 0.01
+R5 X14:pad X3:pad 235.851
+R6 SH__ X3:pad 29.9661
+R7 X14:pad X7:pad 127.676
+R8 SH__ X7:pad 17.0049
+R9 X3:pad X7:pad 121.954
+*
+*
+*|NET SNS0+__ 0
+*|P (SNS0+__ X 0.0)
+*|I (X4:pad X4 pad B 0.0)
+R13 SNS0+__ X4:pad 0.01
+*
+*|NET SNS0-__ 0
+*|P (SNS0-__ X 0.0)
+*|I (X5:pad X5 pad B 0.0)
+R14 SNS0-__ X5:pad 0.01
+*
+*|NET MID0__ 0
+*|P (MID0__ X 0.0)
+*|I (X6:pad X6 pad B 0.0)
+R15 MID0__ X6:pad 0.01
+*
+*|NET SNS2-__ 0
+*|P (SNS2-__ X 0.0)
+*|I (X8:pad X8 pad B 0.0)
+R16 SNS2-__ X8:pad 0.01
+*
+*|NET SNS2+__ 0
+*|P (SNS2+__ X 0.0)
+*|I (X9:pad X9 pad B 0.0)
+R17 SNS2+__ X9:pad 0.01
+*
+*|NET MID2__ 0
+*|P (MID2__ X 0.0)
+*|I (X10:pad X10 pad B 0.0)
+R18 MID2__ X10:pad 0.01
+*
+*|NET MID1__ 0
+*|P (MID1__ X 0.0)
+*|I (X11:pad X11 pad B 0.0)
+R19 MID1__ X11:pad 0.01
+*
+*|NET SNS1+__ 0
+*|P (SNS1+__ X 0.0)
+*|I (X13:pad X13 pad B 0.0)
+R20 SNS1+__ X13:pad 0.01
+*
+*|NET SNS1-__ 0
+*|I (X15:pad X15 pad B 0.0)
+*|I (X16:pad X16 pad B 0.0)
+*|P (SNS1-__ X 0.0)
+*|I (X12:pad X12 pad B 0.0)
+R10 X15:pad X16:pad 227.074
+R11 X15:pad SNS1-__ 2574.23
+R12 SNS1-__ X12:pad 0.01
+R100 X18:pad X17:pad 500.9
+*
+* Instance Section
+*
+X0 X0:pad pad
+X1 X1:pad pad
+X2 X2:pad pad
+X3 X3:pad pad
+X4 X4:pad pad
+X5 X5:pad pad
+X6 X6:pad pad
+X7 X7:pad pad
+X8 X8:pad pad
+X9 X9:pad pad
+X10 X10:pad pad
+X11 X11:pad pad
+X12 X12:pad pad
+X13 X13:pad pad
+X14 X14:pad pad
+X15 X15:pad pad_belect name=SNS1-__
+X16 X16:pad pad_struct name=SNS1-__
+X17 X17:pad pad_belect name=SNS2-__
+X18 X18:pad pad_struct name=SNS2-__
+*
+.ends
+*
