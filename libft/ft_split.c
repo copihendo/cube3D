@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 19:23:56 by mguadalu          #+#    #+#             */
-/*   Updated: 2021/04/30 20:47:24 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/09 22:26:45 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,25 +113,25 @@ char			**ft_split(char const *s, char c)
 	size_t	i;
 	size_t	n;
 	size_t	j;
+	size_t	count_non_c;
 
 	n = -1;
 	i = 0;
-	if (!s || !(dst = ((char **)malloc(sizeof(char *) * (ft_nword(s, c) + 1)))))
+	if (!s || !(dst = (char **)ft_calloc(ft_nword(s, c) + 1, sizeof(char *))))
 		return (NULL);
-	while (++n < (ft_nword(s, c)))
+	while (++n < ft_nword(s, c))
 	{
-		j = 0;
 		while (s[i] == c && s[i] != '\0')
 			i++;
-		if (!(dst[n] = ((char *)malloc(sizeof(char) * ((ln(&s[i], c)) + 1)))))
+		count_non_c = ln(s + i, c);
+		dst[n] = ft_substr(s, i, count_non_c);
+		if (!dst[n])
 		{
 			ft_clean(dst);
 			return (NULL);
 		}
-		while (s[i] != c && s[i] != '\0')
-			dst[n][j++] = s[i++];
-		dst[n][j] = '\0';
+		i += count_non_c;
+		j = 0;
 	}
-	dst[n] = NULL;
 	return (dst);
 }

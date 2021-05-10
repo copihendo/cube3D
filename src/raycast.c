@@ -6,90 +6,6 @@ char			ft_impact(t_base *base, int xx, int yy)
 	return (base->map.data[yy * base->map.width + xx]);
 }
 
-/*
-// static void	ft_init_step(t_base *base)
-// {
-// 	if (base->rcst.ray_dir.xx < 0)
-// 	{
-// 		base->rcst.step.xx = -1;
-// 		base->rcst.side_dist.xx = (base->player.xx - base->rcst.map_x) \
-// 		* base->rcst.delta_dist.xx;
-// 	}
-// 	else
-// 	{
-// 		base->rcst.step.xx = 1;
-// 		base->rcst.side_dist.xx = (base->rcst.map_x + 1.0 - base->player.xx) \
-// 		* base->rcst.delta_dist.xx;
-// 	}
-// 	if (base->rcst.ray_dir.yy < 0)
-// 	{
-// 		base->rcst.step.yy = -1;
-// 		base->rcst.side_dist.yy = (base->player.yy - base->rcst.map_y) \
-// 		* base->rcst.delta_dist.yy;
-// 	}
-// 	else
-// 	{
-// 		base->rcst.step.yy = 1;
-// 		base->rcst.side_dist.yy = (base->rcst.map_y + 1.0 - base->player.yy) \
-// 		* base->rcst.delta_dist.yy;
-// 	}
-// }
-
-// static void	ft_calc_dist(t_base *base)
-// {
-// 	if (base->rcst.side == 0)
-// 	{
-// 		base->wall.dist = (base->rcst.map_x - base->player.xx \
-// 		+ (1 - base->rcst.step.xx) / 2) / base->rcst.ray_dir.xx;
-// 	}
-// 	else
-// 	{
-// 		base->wall.dist = ((base->rcst.map_y - base->player.yy \
-// 		+ (1 - base->rcst.step.yy) / 2) / base->rcst.ray_dir.yy);
-// 	}
-// }
-
-// static void	ft_dda(t_base *base)
-// {
-// 	int hit;
-
-// 	hit = 0;
-// 	while (hit == 0)
-// 	{
-// 		if (base->rcst.side_dist.xx < base->rcst.side_dist.yy)
-// 		{
-// 			base->rcst.side_dist.xx += base->rcst.delta_dist.xx;
-// 			base->rcst.map_x += base->rcst.step.xx;
-// 			base->rcst.side = 0;
-// 		}
-// 		else
-// 		{
-// 			base->rcst.side_dist.yy += base->rcst.delta_dist.yy;
-// 			base->rcst.map_y += base->rcst.step.yy;
-// 			base->rcst.side = 1;
-// 		}
-// 		if (base->map.data[base->rcst.map_y * base->map.width \
-// 		+ base->rcst.map_x] == '1')
-// 			hit = 1;
-// 	}
-// }
-
-// void		ft_raycasting(int x, t_base *base)
-// {
-// 	base->rcst.cam_x = 2 * x / (float)base->width_screen - 1;
-// 	base->rcst.ray_dir.xx = base->player.dir.xx + base->player.plane.xx \
-// 	* base->rcst.cam_x;
-// 	base->rcst.ray_dir.yy = base->player.dir.yy + base->player.plane.yy \
-// 	* base->rcst.cam_x;
-// 	base->rcst.map_x = (int)base->player.xx;
-// 	base->rcst.map_y = (int)base->player.yy;
-// 	base->rcst.delta_dist.xx = fabs(1 / base->rcst.ray_dir.xx);
-// 	base->rcst.delta_dist.yy = fabs(1 / base->rcst.ray_dir.yy);
-// 	ft_init_step(base);
-// 	ft_dda(base);
-// 	ft_calc_dist(base);
-// } */
-
 int ft_is_floor(float val)
 {
 	return(floor(val) == val);
@@ -117,6 +33,7 @@ void ft_tamer(t_strip *strip)
 void ft_choice_wall(t_strip *strip, t_section *sec)
 {
 	t_fpos pos[4];
+	int p2;
 
 	pos[0].xx =  floor(strip->xx);
 	pos[0].yy =  floor(strip->yy);
@@ -126,89 +43,106 @@ void ft_choice_wall(t_strip *strip, t_section *sec)
 	pos[2].yy =  ceil(strip->yy);
 	pos[3].xx =  floor(strip->xx);
 	pos[3].yy =  ceil(strip->yy);
-	if(strip->dir < 0.25)
+
+	strip->code = (int)(strip->dir * 4);
+	p2 = (strip->code + 1) % 4;
+	if(strip->dir <	ft_to_diap(1 - atan2(strip->xx - pos[p2].xx, strip->yy - pos[p2].yy) / (2 * M_PI)))
 	{
-		if(strip->dir < 0.25 - atan((strip->yy - pos[1].yy) / (pos[1].xx - strip->xx)) / (2 * M_PI))
-		{
-			ft_memmove(sec->pos, pos, sizeof(t_fpos));
-			ft_memmove(sec->pos + 1, pos + 1, sizeof(t_fpos));
-			// printf("0 dir\n");
-			strip->code = 0;
-		}
-		else
-		{
-			ft_memmove(sec->pos, pos + 1, sizeof(t_fpos));
-			ft_memmove(sec->pos + 1, pos + 2, sizeof(t_fpos));
-			// printf("1 dir\n");
-			strip->code = 1;
-		}
+		ft_memmove(sec->pos, pos + strip->code, sizeof(t_fpos));
+		ft_memmove(sec->pos + 1, pos + p2, sizeof(t_fpos));
 	}
-	else if(strip->dir < 0.5)
+	else
 	{
-		// printf("%f %f ft_choice_wall <0.5\n", strip->dir, 0.5 + atan((pos[1].xx - strip->xx) / (pos[1].yy - strip->yy)) / (2 * M_PI));
-		if(strip->dir < 0.5 - atan((pos[2].xx - strip->xx) / (pos[2].yy - strip->yy)) / (2 * M_PI))
-		{
-			ft_memmove(sec->pos, pos + 1, sizeof(t_fpos));
-			ft_memmove(sec->pos + 1, pos + 2, sizeof(t_fpos));
-			// printf("1 dir\n");
-			strip->code = 1;
-		}
-		else
-		{
-			ft_memmove(sec->pos, pos + 2, sizeof(t_fpos));
-			ft_memmove(sec->pos + 1, pos + 3, sizeof(t_fpos));
-			// printf("2 dir\n");
-			strip->code = 2;
-		}
+		ft_memmove(sec->pos, pos + p2, sizeof(t_fpos));
+		ft_memmove(sec->pos + 1, pos + (p2 + 1) % 4, sizeof(t_fpos));
+		strip->code = p2;
 	}
-	else if(strip->dir < 0.75)
-	{	
-		if(strip->dir < 0.75 - atan((pos[3].yy - strip->yy) / (strip->xx - pos[3].xx)) / (2 * M_PI))
-		{
-			ft_memmove(sec->pos, pos + 2, sizeof(t_fpos));
-			ft_memmove(sec->pos + 1, pos + 3, sizeof(t_fpos));
-			// printf("2 dir\n");
-			strip->code = 2;
-		}
-		else
-		{
-			ft_memmove(sec->pos, pos + 3, sizeof(t_fpos));
-			ft_memmove(sec->pos + 1, pos, sizeof(t_fpos));
-			// printf("3 dir\n");
-			strip->code = 3;
-		}
-	}
-	else 
-	{
-		if(strip->dir < 1 - atan((strip->xx - pos[0].xx) / (strip->yy - pos[0].yy)) / (2 * M_PI))
-		{
-			ft_memmove(sec->pos, pos + 3, sizeof(t_fpos));
-			ft_memmove(sec->pos + 1, pos, sizeof(t_fpos));
-			// printf("3 dir\n");
-			strip->code = 3;
-		}
-		else
-		{
-			ft_memmove(sec->pos, pos, sizeof(t_fpos));
-			ft_memmove(sec->pos + 1, pos + 1, sizeof(t_fpos));
-			// printf("0 dir\n");
-			strip->code = 0;
-		}
-	}
+
+
+
+
+
+
+	// if(strip->dir < 0.25)
+	// {
+	// 	if(strip->dir < 0.25 - atan((strip->yy - pos[1].yy) / (pos[1].xx - strip->xx)) / (2 * M_PI))
+	// 	{
+	// 		ft_memmove(sec->pos, pos, sizeof(t_fpos));
+	// 		ft_memmove(sec->pos + 1, pos + 1, sizeof(t_fpos));
+	// 		strip->code = 0;
+	// 	}
+	// 	else
+	// 	{
+	// 		ft_memmove(sec->pos, pos + 1, sizeof(t_fpos));
+	// 		ft_memmove(sec->pos + 1, pos + 2, sizeof(t_fpos));
+	// 		strip->code = 1;
+	// 	}
+	// }
+	// else if(strip->dir < 0.5)
+	// {
+	// 	if(strip->dir < 0.5 - atan((pos[2].xx - strip->xx) / (pos[2].yy - strip->yy)) / (2 * M_PI))
+	// 	{
+	// 		ft_memmove(sec->pos, pos + 1, sizeof(t_fpos));
+	// 		ft_memmove(sec->pos + 1, pos + 2, sizeof(t_fpos));
+	// 		strip->code = 1;
+	// 	}
+	// 	else
+	// 	{
+	// 		ft_memmove(sec->pos, pos + 2, sizeof(t_fpos));
+	// 		ft_memmove(sec->pos + 1, pos + 3, sizeof(t_fpos));
+	// 		strip->code = 2;
+	// 	}
+	// }
+	// else if(strip->dir < 0.75)
+	// {	
+	// 	if(strip->dir < 0.75 - atan((pos[3].yy - strip->yy) / (strip->xx - pos[3].xx)) / (2 * M_PI))
+	// 	{
+	// 		ft_memmove(sec->pos, pos + 2, sizeof(t_fpos));
+	// 		ft_memmove(sec->pos + 1, pos + 3, sizeof(t_fpos));
+	// 		strip->code = 2;
+	// 	}
+	// 	else
+	// 	{
+	// 		ft_memmove(sec->pos, pos + 3, sizeof(t_fpos));
+	// 		ft_memmove(sec->pos + 1, pos, sizeof(t_fpos));
+	// 		strip->code = 3;
+	// 	}
+	// }
+	// else 
+	// {
+	// 	if(strip->dir < 1 - atan((strip->xx - pos[0].xx) / (strip->yy - pos[0].yy)) / (2 * M_PI))
+	// 	{
+	// 		ft_memmove(sec->pos, pos + 3, sizeof(t_fpos));
+	// 		ft_memmove(sec->pos + 1, pos, sizeof(t_fpos));
+	// 		strip->code = 3;
+	// 	}
+	// 	else
+	// 	{
+	// 		ft_memmove(sec->pos, pos, sizeof(t_fpos));
+	// 		ft_memmove(sec->pos + 1, pos + 1, sizeof(t_fpos));
+	// 		strip->code = 0;
+	// 	}
+	// }
 }
 
 void ft_cross(t_section *sec_wall, t_section *sec_ray, t_strip *strip)
 {
 	float n;
-    if (sec_wall->pos[1].yy - sec_wall->pos[0].yy != 0) {  // a(y)
-        float q = (sec_wall->pos[1].xx - sec_wall->pos[0].xx) / (sec_wall->pos[0].yy - sec_wall->pos[1].yy);   
-        float sn = (sec_ray->pos[0].xx - sec_ray->pos[1].xx) + (sec_ray->pos[0].yy - sec_ray->pos[1].yy) * q; 
+	float q;
+	float sn;
+	float fn;
+
+    if (sec_wall->pos[1].yy - sec_wall->pos[0].yy != 0)
+	{
+        q = (sec_wall->pos[1].xx - sec_wall->pos[0].xx) / (sec_wall->pos[0].yy - sec_wall->pos[1].yy);   
+        sn = (sec_ray->pos[0].xx - sec_ray->pos[1].xx) + (sec_ray->pos[0].yy - sec_ray->pos[1].yy) * q; 
 		if (!sn)
-			return ; // c(x) + c(y)*q
-        float fn = (sec_ray->pos[0].xx - sec_wall->pos[0].xx) + (sec_ray->pos[0].yy - sec_wall->pos[0].yy) * q;   // b(x) + b(y)*q
+			return ;
+        fn = (sec_ray->pos[0].xx - sec_wall->pos[0].xx) + (sec_ray->pos[0].yy - sec_wall->pos[0].yy) * q;   // b(x) + b(y)*q
         n = fn / sn;
     }
-    else {
+    else
+	{
         if (!(sec_ray->pos[0].yy - sec_ray->pos[1].yy)) 
 			return ;
         n = (sec_ray->pos[0].yy - sec_wall->pos[0].yy) / (sec_ray->pos[0].yy - sec_ray->pos[1].yy);   // c(y)/b(y)

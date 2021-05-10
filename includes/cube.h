@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/11 19:54:33 by copihendo        ###   ########.fr       */
+/*   Updated: 2021/05/09 21:26:50 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
-# include "libft.h"
-# include "mlx.h"
+# include "../libft/libft.h"
+# include "../mlx/mlx.h"
 # define BUFFER_SIZE 1024
 // # define keycode 76
 # define W 13
@@ -61,10 +61,10 @@ typedef struct  s_junk
 
 typedef struct	s_color
 {
-	char 				flag;
-	unsigned char 		R;
-	unsigned char 		G;
 	unsigned char 		B;
+	unsigned char 		G;
+	unsigned char 		R;
+	char 				flag;
 }				t_color;
 
 typedef struct s_image
@@ -143,9 +143,7 @@ typedef struct s_map
 {
 	int		width;
 	int		height;
-	char		*data;
-	// int width;
-	// int height;
+	char	*data;
 }				t_map;
 
 typedef	struct	s_wall
@@ -193,7 +191,7 @@ int		ft_check_map(t_base *base);
 // int		ft_read_map(t_base *base, t_list *list, char *line);
 int		ft_read_map(t_base *base, char **line);
 t_list	*ft_lstadd_back_content(t_list **list, void *content);
-int		ft_exit(t_base *base);
+// int		ft_exit(t_base *base);
 char		ft_impact(t_base *base, int xx, int yy);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_mlx(t_base *base);
@@ -202,6 +200,16 @@ int		ft_key_out(int keycode, t_base *base);
 void	ft_check_keys(t_base *base);
 void	ft_raycast(t_base *base, t_strip *strip);
 float	ft_to_diap(float val);
+void	ft_mlx_pixel_put(t_image *image, int x, int y, t_color color);
+t_color	ft_get_color_in_tex(t_base *base, char code, float xx_otn, float yy_otn);
+
+void 	ft_fill_sprite(t_base *base);
+void	ft_render_sprite(t_base *base, t_strip *strip);
+void 	ft_init_sprite(t_base *base, int x, int y);
+int		ft_tick(t_base *base);
+void	ft_screenshot(t_base *base);
+
+int			ft_exit(void *param, char *message);
 
 
 #endif

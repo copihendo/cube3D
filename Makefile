@@ -5,7 +5,8 @@ LIBS_ADD =  -L ./mlx/ -L ./libft/ -lft -lmlx -framework OpenGL -framework AppKit
 CFLAGS = -Wall -Wextra -Werror -O3 ${INCLUDES}
 SRCS =  $(addprefix ./src/,\
                 main.c lstadd_back_content.c mlx_init.c exit.c \
-1_parse.c 2_read_file.c read_config.c read_map.c raycast.c moving.c \
+				1_parse.c 2_read_file.c read_config.c read_map.c\
+				sprite.c screen.c raycast.c moving.c \
         )
 OBJS = $(SRCS:.c=.o)
 

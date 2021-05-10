@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:39:19 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/03 20:34:55 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/09 21:28:35 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ int main(int cnt_arg, char **arguments)
 	base.mlx_ptr = mlx_init();
 	ft_parse(&base, arguments[1]);
 	ft_mlx(&base);
+	if(base.flag_bmp == 0)
+		mlx_loop(base.mlx_ptr);
+	else
+	{
+		ft_tick(&base);
+		ft_screenshot(&base);
+	}
+	ft_exit(&base, "Game over");
+	return(0);
 }

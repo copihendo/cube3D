@@ -1,72 +1,34 @@
 #include "cube.h"
 
-static void	ft_move_player(t_base *base, char key)
+static void	ft_move_player(t_base *base)
 {
-	// printf("1 ft_move_player %f %f\n", base->player.xx, base->player.yy);
+	int forward;
+	int shift;
+	float delta_xx;
+	float delta_yy;
+
+	forward = base->key.w - base->key.s;
+	shift = base->key.d - base->key.a;
 	base->player.move_speed = 0.15;
-	if (key == 'W')
-	{
-		base->player.xx += base->player.dir.xx * base->player.move_speed;
-		base->player.yy += base->player.dir.yy * base->player.move_speed;
-	}
-	if (key == 'S')
-	{
-		base->player.xx -= base->player.dir.xx * base->player.move_speed;
-		base->player.yy -= base->player.dir.yy * base->player.move_speed;
-	}
-	if (key == 'A')
-	{
-		base->player.xx += base->player.dir.yy * base->player.move_speed;
-		base->player.yy -= base->player.dir.xx * base->player.move_speed;
-	}
-	if (key == 'D')
-	{
-		base->player.xx -= base->player.dir.yy * base->player.move_speed;
-		base->player.yy += base->player.dir.xx * base->player.move_speed;
-	}
-	// printf("2 ft_move_player %f %f\n", base->player.xx, base->player.yy);
+	delta_xx = (base->player.dir.xx * forward - base->player.dir.yy * shift) * base->player.move_speed;
+	delta_yy = (base->player.dir.xx * shift + base->player.dir.yy * forward) * base->player.move_speed;
+	if (ft_impact(base, (int)(delta_xx + base->player.xx), (int)base->player.yy) == '0')
+		base->player.xx += delta_xx;
+	if (ft_impact(base, (int)base->player.xx, (int)(base->player.yy + delta_yy)) == '0')
+		base->player.yy += delta_yy;
 }
 
-static void	ft_move_camera(t_base *base, char key)
+static void	ft_move_camera(t_base *base)
 {
-	// float old_plane_x;
-	// float old_dir_x;
-	// float rot;
-
-	// old_plane_x = base->player.plane.xx;
-	// old_dir_x = base->player.dir.xx;
-	base->player.direct = ft_to_diap(base->player.direct + ROT_SPEED * ((key == RF) * 2 - 1));
+	base->player.direct = ft_to_diap(base->player.direct + ROT_SPEED * (base->key.r - base->key.l));
 	base->player.dir.xx = cosf(ft_to_diap(-0.25 + base->player.direct) * M_PI * 2);
 	base->player.dir.yy = sinf(ft_to_diap(-0.25 + base->player.direct) * M_PI * 2);
-	// base->player.dir.xx = base->player.dir.xx * cos(rot) - base->player.dir.yy * sin(rot);
-	// base->player.dir.yy = old_dir_x * sin(rot) + base->player.dir.yy * cos(rot);
-	// base->player.plane.xx = base->player.plane.xx * cos(rot) \
-	// - base->player.plane.yy * sin(rot);
-	// base->player.plane.yy = old_plane_x * sin(rot) + base->player.plane.yy * cos(rot);
 }
 
 void		ft_check_keys(t_base *base)
 {
-	if (base->key.w == 1 && '0' == ft_impact(base, base->player.xx + \
-	 base->player.dir.xx * base->player.move_speed, base->player.yy + \
-	 base->player.dir.yy * base->player.move_speed))
-		ft_move_player(base, 'W');
-	if (base->key.s == 1 && '0' == ft_impact(base, base->player.xx - \
-	 base->player.dir.xx * base->player.move_speed, base->player.yy - \
-	 base->player.dir.yy * base->player.move_speed))
-		ft_move_player(base, 'S');
-	if (base->key.a == 1 && '0' == ft_impact(base, base->player.xx - \
-	 base->player.plane.xx * base->player.move_speed, base->player.yy - \
-	 base->player.plane.yy * base->player.move_speed))
-		ft_move_player(base, 'A');
-	if (base->key.d == 1 && '0' == ft_impact(base, base->player.xx + \
-	 base->player.plane.xx * base->player.move_speed, base->player.yy + \
-	 base->player.plane.yy * base->player.move_speed))
-		ft_move_player(base, 'D');
-	if (base->key.l == 1)
-		ft_move_camera(base, LF);
-	if (base->key.r == 1)
-		ft_move_camera(base, RF);
+	ft_move_player(base);
+	ft_move_camera(base);
 }
 
 int			ft_key_in(int keycode, t_base *base)
@@ -84,7 +46,7 @@ int			ft_key_in(int keycode, t_base *base)
 	if (keycode == RF)
 		base->key.r = 1;
 	if (keycode == esc)
-		ft_exit(base);
+		ft_exit(base, "DO NOT tuch ESQ\nGame over");
 	return (0);
 }
 

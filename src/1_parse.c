@@ -6,7 +6,7 @@
 /*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 22:26:54 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/08 16:12:50 by telron           ###   ########.fr       */
+/*   Updated: 2021/05/09 22:26:05 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void ft_handle_line(t_base *base)
 	char *str;
 	
 	base->junk.lines = ft_split(base->junk.file, '\n');
+	if (!base->junk.lines)
+		ft_exit(base, "ft_handle_line split error");
 	i = 0;
 	while ((str = base->junk.lines[i]))
 	{
@@ -41,18 +43,18 @@ void ft_handle_line(t_base *base)
 		i++;
 	}
 	if (ft_check_config(base))
-		ft_exit(base);
-		write(1, "start_read_map\n", 15);
+		ft_exit(base, "Invalid Map");
+		// write(1, "start_read_map\n", 15);
 	ft_read_map(base, base->junk.lines + i);
-		write(1, "end_read_map\n", 13);	
+		// write(1, "end_read_map\n", 13);	
 }
 
 void	ft_parse(t_base *base, const char *path)
 {
 	if(!(base->junk.file = ft_read_file(path)))
-		ft_exit(base);
+		ft_exit(base,"Can't read file");
 	ft_handle_line(base);
-	write(1, "end_parse\n", 10);	
+	// write(1, "end_parse\n", 10);	
 	// printf("\n\n\tparse_finish\n");
 	// printf("width  screen %d\n", base->width_screen);
 	// printf("height screen %d\n", base->height_screen);
@@ -66,7 +68,7 @@ void	ft_parse(t_base *base, const char *path)
 	// printf("map.height  %zu\n", base->map.height);
 	// printf("base->player.x %f\n", base->player.x);
 	// printf("base->player.y %f\n", base->player.y);
-	printf("base->player.direct%f\n", base->player.direct);
+	// printf("base->player.direct%f\n", base->player.direct);
 	// int i = 0;
 	// while (i++ < 463)
 	// 	printf("%c", base->map.data[i]);

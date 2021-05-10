@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 04:54:33 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/11 19:59:10 by copihendo        ###   ########.fr       */
+/*   Updated: 2021/05/09 21:46:58 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	ft_find_max_width(t_base *base, char **lines)
 	printf("FINAL height %d\n", base->map.height);
 }
 
-void ft_init_sprite(t_base *base, int x, int y)
-{
+// void ft_init_sprite(t_base *base, int x, int y)
+// {
 
-	t_sprite *sprite; 
+// 	t_sprite *sprite; 
 
-	// замолочить область памяти под структуру спрайт
-	sprite = malloc(sizeoff(t_sprite));
-	// заполнить ху(+0.5)
-	sprite.pos.xx = x + 0.5;
-	sprite.pos.yy = y + 0.5;
-	// добавить через add_back_kontent
+// 	// замолочить область памяти под структуру спрайт
+// 	sprite = malloc(sizeof(t_sprite));
+// 	// заполнить ху(+0.5)
+// 	sprite->pos.xx = x + 0.5;
+// 	sprite->pos.yy = y + 0.5;
+// 	// добавить через add_back_kontent
 
-}
+// }
 
 void	*ft_transform_map(t_base *base, char **lines)  // функция преобразует карту, 
 {
@@ -55,11 +55,11 @@ void	*ft_transform_map(t_base *base, char **lines)  // функция преоб
 	int x;
 	char cell;
 	char *ptr;
-	static char *dir = "NWSE"; // указатель на direction для упрощения обработки карты
+	static char *dir = "NESW"; // указатель на direction для упрощения обработки карты
 
 	// printf("transform map start\n");
 	if (!(base->map.data = ft_calloc(base->map.width * base->map.height + 1, 1)))
-		ft_exit(base);
+		ft_exit(base, "ERROR Malloc for Map");
 	// printf("size calloc %lu\n", base->map.width * base->map.height + 1);
 	// printf("transform map make calloc\n");
 	// printf("map.data %s\n", base->map.data);
@@ -78,7 +78,7 @@ void	*ft_transform_map(t_base *base, char **lines)  // функция преоб
 			if ((ptr = ft_strchr(dir, cell))) 	// аналогия lines[i] == 'N' || lines[i] == 'W' || lines[i] == 'S' || lines[i] == 'E')
 			{
 				if (!(base->player.xx == 0 && base->player.yy == 0)) //  проверка, что конфиг для игрока чистый, т.е. игрок проверяется первый раз, иначе не валидная карта
-					ft_exit(base);
+					ft_exit(base, "Invalid Map: two players");
 				base->player.yy = y + 0.5;									// записываем начальное положение игрока
 				base->player.xx = x + 0.5;
 				base->player.direct = (float)(ptr - dir) / 4; 				// запись направления в структуру
@@ -87,7 +87,7 @@ void	*ft_transform_map(t_base *base, char **lines)  // функция преоб
 			else if (ft_strchr("012", cell))
 				base->map.data[x + y * base->map.width] = cell;
 			if(cell == '2')
-				ft_init_sprite();
+				ft_init_sprite(base, x, y);
 				// else if (ft_strchr(" ", cell))
 				// 	base->map.data[x + y * base->map.width] = 0;
 			x++;
@@ -141,24 +141,3 @@ int		ft_read_map(t_base *base, char **line)
 		printf("invalid structure map do not change");
 	return(0);
 }
-
-
-
-
-	// while (line = base->junk.lines[num_lines])
-	// {
-	// 	if ((width = ft_strlen(line)) > base->junk.max_width) // в теории можно обойтись без цшвек в junk
-	// 		base->junk.max_width = width;
-	// 	ft_lstadd_back(begin_list, ft_lstnew(line));
-	// }
-	// while (ptr != NULL)
-	// {
-	// 	//if (ft_strlen(list->content) < base->junk.max_width)
-	// ft_max_widh(base->junk.lines[num_lines])	
-	// 	if ((add_wdth = base->junk.max_width - ft_strlen(list->content) > 0)
-	// 	{
-	// 		content = 
-	// 		ft_lstadd_back_content(begin_list, )
-	// 	}
-	// }
-	// ft_extans_map();

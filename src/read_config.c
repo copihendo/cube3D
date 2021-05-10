@@ -6,7 +6,7 @@
 /*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 00:42:08 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/08 20:03:41 by telron           ###   ########.fr       */
+/*   Updated: 2021/05/09 22:55:32 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ void	ft_parse_texture(t_base *base, t_image *texture)
 
 	if(!(texture->link = mlx_xpm_file_to_image(base->mlx_ptr, base->junk.words[1], &texture->width, &texture->height )))
 	{	
-		write(1, "parse_texture_error\n", 20);
-		ft_exit(base); 
+		// write(1, "parse_texture_error\n", 20);
+		ft_exit(base, "parse_texture_error"); 
 	}
 	if(ft_check_link(base) == -1)
 	{
-		write(1, "invalid extension of texture\n", 29); // оу щит, эта проверка не нужна была..... mlx_xpm и так ее проверяет
-		ft_exit(base);
+		// write(1, "invalid extension of texture\n", 29); // оу щит, эта проверка не нужна была..... mlx_xpm и так ее проверяет
+		ft_exit(base, "invalid extension of texture");
 	} 
 	// texture->color = (t_color *)mlx_get_data_addr(texture->link, &texture->bits_pix, &texture->line_len, &texture->endian);
 	texture->data = (t_color *)mlx_get_data_addr(texture->link, &n, &n, &n);
 	if(!texture->data)
-		ft_exit(base);
+		ft_exit(base, "texture->data");
 // если линк нуль терминатор вызвать экзит
 //проверить и вывести ошибку если есть, или стандратное закытие программы. 
 }
@@ -79,33 +79,26 @@ int ft_color_atoi(t_base *base, char *kit)
 	int res;
 	
 	res = 0;
-	// if (kit[0] == '0') ?????????? эти условия нужны ли?
-	// { write(1, "color_atoi1\n", 12);
-	// 	ft_exit(base);}
 	i = 0;
 	while (kit[i] >= '0' && kit[i] <= '9' )
 	{
-		// write(1, "color_atoi2\n", 12);
 		res = res * 10 + (kit[i] - '0');
 		i++;
 	}
-	printf("%d\n", res);
 	if (kit[i] != '\0')
-		ft_exit(base); 
-	if (res >= 0 && res < 256)
-	{	//write(1, "color_atoi3\n", 12);
-	return (res);}
-	else
-		ft_exit(base);
-		return(0); // ????
+		ft_exit(base, "Color out of range");
+	if (res < 0 || res > 255)
+		ft_exit(base, "Color out of range");
+	return (res);
 }
 
 void ft_parse_color(t_base *base, t_color *color)
 {
-	printf("junk words %s\n", base->junk.words[1]);
+	// printf("junk words %s\n", base->junk.words[1]);
 	if(!(base->junk.kit = ft_split(base->junk.words[1], ',')))
 	{	//write(1, "parse_color1\n", 12);
-		ft_exit(base);}
+		ft_exit(base, "Invalid colors");
+	}
 	if (base->junk.kit[0] != 0 && base->junk.kit[1] != 0 && base->junk.kit[2] != 0 && base->junk.kit[3] == 0)
 	{
 		// write(1, "parse_color2\n", 13);
@@ -116,7 +109,9 @@ void ft_parse_color(t_base *base, t_color *color)
 		// write(1, "parse_color3\n", 13);
 	}
 	else
-		ft_exit(base);
+		ft_exit(base, "Invalid colors");
+	ft_free(base->junk.kit);
+	base->junk.kit = 0;
 }
 
 int ft_check_number(t_base *base)
@@ -162,18 +157,18 @@ void ft_screen_size(t_base *base)
 	while (base->junk.words[i])	// проверить что число слов 3
 		i++;
 	if(i != 3)
-		printf("invalid number of arguments in resolution"); // если не совпалдает вызвать ft_exit
+		ft_exit(base, "invalid number of arguments in resolution"); // если не совпалдает вызвать ft_exit
 	if (!ft_check_number(base)) // проверить что 2 и 3 слово числа
 		{	
 			base->width_screen = ft_atoi(base->junk.words[1]); // фт_атои чар-инт
 			base->height_screen = ft_atoi(base->junk.words[2]); // фт_атои чар-инт
 		}
-	else 
-		printf("size is_not valid\n");	
-	printf("%d %d\n",	base->width_screen, ft_atoi(base->junk.words[1]));
+	else
+		ft_exit(base, "size is_not valid");
+	// printf("%d %d\n",	base->width_screen, ft_atoi(base->junk.words[1]));
 	ft_check_screen_size(base);	//сделать проверку на мининум, если меньше ставим 100 и максимум, и поставить ширину экрана 
-	printf("%d\n",	ft_atoi(base->junk.words[2]));
-	printf("function fr_screen size vrode works\n");
+	// printf("%d\n",	ft_atoi(base->junk.words[2]));
+	// printf("function fr_screen size vrode works\n");
 
 // 	base->width_screen = base->junk.lines[1]; 
 // 	base->height_screen = base->junk.lines[2]; 
@@ -185,38 +180,22 @@ void ft_read_config(t_base *base, char *str)
 	size_t i;
 
 	i = 0;
-	// write(1, "read_config1\n", 13);
-	// base->junk.words = ft_split(*base->junk.lines, ' ');
 	base->junk.words = ft_split(str, ' ');
-	// write(1, "read_config2\n", 13);
 	tag = base->junk.words[0];
-	printf("%s\n", tag);
-	printf("junk.words[0] %s\n", base->junk.words[0]);
-	printf("junk.words[1] %s\n", base->junk.words[1]);
 	if (!ft_strcmp(tag, "R"))
-	{	//write(1, "read_config3\n", 13);
-		// printf("%s\n", tag);
-		ft_screen_size(base);}
+		ft_screen_size(base);
 	else if (!ft_strcmp(tag, "NO"))
-	{		//printf("%s\n", tag);
-			// write(1, "read_config4\n", 13);
-		ft_parse_texture(base, &base->textures.no);	}
+		ft_parse_texture(base, &base->textures.no);
 	else if	(!ft_strcmp(tag, "SO"))
-		{//write(1, "read_config5\n", 13);
-		ft_parse_texture(base, &base->textures.so);}
+		ft_parse_texture(base, &base->textures.so);
 	else if (!ft_strcmp(tag, "WE"))
-{		//write(1, "read_config7\n", 13);
-		ft_parse_texture(base, &base->textures.we);}
+		ft_parse_texture(base, &base->textures.we);
 	else if	(!ft_strcmp(tag, "EA"))
-	{	//write(1, "read_config8\n", 13);
-		ft_parse_texture(base, &base->textures.ea);}
+		ft_parse_texture(base, &base->textures.ea);
 	else if (!ft_strcmp(tag, "S"))
-	{	//write(1, "read_config9\n", 13);
-		ft_parse_texture(base, &base->textures.s);	}
+		ft_parse_texture(base, &base->textures.s);
 	else if	(!ft_strcmp(tag, "F"))
-	// {	//write(1, "read_confi10\n", 13);
 		ft_parse_color(base, &base->floor);
-		// write(1, "read_confi11\n", 13);}
 	else if	(!ft_strcmp(tag, "C"))
 		ft_parse_color(base, &base->ceil);
 	ft_free(base->junk.words);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: copihendo <copihendo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 15:22:51 by mguadalu          #+#    #+#             */
-/*   Updated: 2021/05/09 03:41:19 by copihendo        ###   ########.fr       */
+/*   Updated: 2021/05/09 20:26:34 by telron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int ft_tick(t_base *base)
 
 	// printf("tick\n");
 	ft_check_keys(base);
-	ft_fill_sprite(base, strip);
+	ft_fill_sprite(base);
 	ft_drw_flr_ceil(base);
 	ft_raycast(base, strip);
 	ft_render(base, strip);
@@ -196,5 +196,4 @@ void	ft_mlx(t_base *base)
 	mlx_hook(base->mlx_win, 3, 1L << 0, ft_key_out, base);
 	mlx_hook(base->mlx_win, 17, 0, ft_exit, base); 
 	mlx_do_key_autorepeatoff(base->mlx_ptr);
-	mlx_loop(base->mlx_ptr);
 }
