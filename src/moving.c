@@ -2,36 +2,43 @@
 
 static void	ft_move_player(t_base *base)
 {
-	int forward;
-	int shift;
-	float delta_xx;
-	float delta_yy;
+	int		forward;
+	int		shift;
+	float	delta_xx;
+	float	delta_yy;
 
 	forward = base->key.w - base->key.s;
 	shift = base->key.d - base->key.a;
 	base->player.move_speed = 0.15;
-	delta_xx = (base->player.dir.xx * forward - base->player.dir.yy * shift) * base->player.move_speed;
-	delta_yy = (base->player.dir.xx * shift + base->player.dir.yy * forward) * base->player.move_speed;
-	if (ft_impact(base, (int)(delta_xx + base->player.xx), (int)base->player.yy) == '0')
+	delta_xx = (base->player.dir.xx * forward - base->player.dir.yy * shift) \
+			* base->player.move_speed;
+	delta_yy = (base->player.dir.xx * shift + base->player.dir.yy * forward) \
+			* base->player.move_speed;
+	if (ft_impact(base, (int)(delta_xx + base->player.xx), (int)base->player.yy) \
+		== '0')
 		base->player.xx += delta_xx;
-	if (ft_impact(base, (int)base->player.xx, (int)(base->player.yy + delta_yy)) == '0')
+	if (ft_impact(base, (int)base->player.xx, (int)(base->player.yy + delta_yy)) \
+		== '0')
 		base->player.yy += delta_yy;
 }
 
 static void	ft_move_camera(t_base *base)
 {
-	base->player.direct = ft_to_diap(base->player.direct + ROT_SPEED * (base->key.r - base->key.l));
-	base->player.dir.xx = cosf(ft_to_diap(-0.25 + base->player.direct) * M_PI * 2);
-	base->player.dir.yy = sinf(ft_to_diap(-0.25 + base->player.direct) * M_PI * 2);
+	base->player.direct = ft_to_diap(base->player.direct + ROT_SPEED \
+		* (base->key.r - base->key.l));
+	base->player.dir.xx = cosf(ft_to_diap(-0.25 + \
+					base->player.direct) * M_PI * 2);
+	base->player.dir.yy = sinf(ft_to_diap(-0.25 + \
+					base->player.direct) * M_PI * 2);
 }
 
-void		ft_check_keys(t_base *base)
+void	ft_check_keys(t_base *base)
 {
 	ft_move_player(base);
 	ft_move_camera(base);
 }
 
-int			ft_key_in(int keycode, t_base *base)
+int	ft_key_in(int keycode, t_base *base)
 {
 	if (keycode == W)
 		base->key.w = 1;
@@ -46,11 +53,11 @@ int			ft_key_in(int keycode, t_base *base)
 	if (keycode == RF)
 		base->key.r = 1;
 	if (keycode == esc)
-		ft_exit(base, "DO NOT tuch ESQ\nGame over");
+		ft_exit(base, "DO NOT tuch ESC\nGame over");
 	return (0);
 }
 
-int			ft_key_out(int keycode, t_base *base)
+int	ft_key_out(int keycode, t_base *base)
 {
 	if (keycode == W)
 		base->key.w = 0;

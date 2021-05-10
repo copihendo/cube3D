@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 21:36:45 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/21 17:11:10 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:26:02 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long int val;
+	long int	val;
 
 	val = n;
 	if (val < 0)

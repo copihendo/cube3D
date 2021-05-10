@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 21:08:50 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/09 21:26:50 by telron           ###   ########.fr       */
+/*   Updated: 2021/05/10 22:29:10 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
-# define CUB_H
+#define CUB_H
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -125,7 +125,6 @@ typedef	struct		s_raycast
 	float			relat_coord;
 }					t_raycast;
 
-
 typedef struct s_player
 {
 	float		xx;
@@ -152,9 +151,6 @@ typedef	struct	s_wall
 	float		*array_dist;
 }				t_wall;
 
-////////////			BASE				//////////
-
-
 typedef struct  s_base
 {
 	t_junk 		junk;
@@ -165,7 +161,6 @@ typedef struct  s_base
 	t_color 	ceil;
 	t_map		map;
 	t_player	player;
-	// void 		*mlx_ptr;
 	void 		*mlx_ptr;
 	void 		*mlx_win;
 	t_wall			wall;
@@ -173,6 +168,7 @@ typedef struct  s_base
 	t_key		key;
 	int 		flag_bmp;
 	t_list		*sprite;
+	t_strip		*strip;
 }               t_base;
 
 char	*ft_read_file(const char *path);
@@ -183,15 +179,12 @@ void	ft_handle_line(t_base *base);
 void	ft_handle_textures(t_base *base);
 int		ft_color_atoi(t_base *base, char *kit);
 void	ft_parse_color(t_base *base, t_color *color);
-// void	ft_read_config(t_base *base);
 void 	ft_read_config(t_base *base, char *str);
 void	ft_find_max_width(t_base *base, char **lines);
 void	*ft_transform_map(t_base *base, char **lines);
 int		ft_check_map(t_base *base);
-// int		ft_read_map(t_base *base, t_list *list, char *line);
 int		ft_read_map(t_base *base, char **line);
 t_list	*ft_lstadd_back_content(t_list **list, void *content);
-// int		ft_exit(t_base *base);
 char		ft_impact(t_base *base, int xx, int yy);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_mlx(t_base *base);
@@ -203,13 +196,19 @@ float	ft_to_diap(float val);
 void	ft_mlx_pixel_put(t_image *image, int x, int y, t_color color);
 t_color	ft_get_color_in_tex(t_base *base, char code, float xx_otn, float yy_otn);
 
-void 	ft_fill_sprite(t_base *base);
+void	ft_fill_sprite(t_base *base);
 void	ft_render_sprite(t_base *base, t_strip *strip);
-void 	ft_init_sprite(t_base *base, int x, int y);
+void	ft_init_sprite(t_base *base, int x, int y);
 int		ft_tick(t_base *base);
 void	ft_screenshot(t_base *base);
-
-int			ft_exit(void *param, char *message);
-
+void	ft_screen_size(t_base *base);
+void	ft_free(char **p);
+int		ft_exit(void *param, char *message);
+int	ft_lst_cmp(t_sprite *sp1, t_sprite *sp2);
+void	ft_lst_add_sort(t_list **begin, t_list *new, int (*ft_cmp)(void *, void *));
+void	ft_drw_flr_ceil(t_base *base);
+void	ft_choice_wall(t_strip *strip, t_section *sec);
+void	ft_cross(t_section *sec_wall, t_section *sec_ray, t_strip *strip);
+void	ft_tamer(t_strip *strip);
 
 #endif

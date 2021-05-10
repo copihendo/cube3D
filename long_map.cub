@@ -1,0 +1,26 @@
+R 1080 800
+NO ./textures/no_textures.xpm
+SO ./textures/so_textures.xpm
+WE ./textures/we_textures.xpm
+EA ./textures/ea_textures.xpm
+
+S ./textures/omon.xpm
+F 102,0,204    
+C 0,0,0
+
+1111
+1021
+1021
+1021
+1021
+1021
+1021
+10211111
+100000S1
+11111111
+
+1111
+1021
+1021
+1021
+1111

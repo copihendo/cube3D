@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 16:36:41 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/19 14:02:16 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:30:16 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	size = ft_strlen(s1) + 1;
-	if (!(s2 = (char*)malloc(size)))
+	s2 = (char *)malloc(size);
+	if (!(s2))
 		return (NULL);
 	ft_strlcpy(s2, s1, size);
 	return (s2);

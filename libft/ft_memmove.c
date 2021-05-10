@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 17:09:16 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/21 17:09:34 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:24:25 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	*ft_memmove(void *dst, void *src, size_t n)
 {
-	unsigned char *updst;
-	unsigned char *upsrc;
+	unsigned char	*updst;
+	unsigned char	*upsrc;
 
-	updst = (unsigned char*)dst;
-	upsrc = (unsigned char*)src;
+	updst = (unsigned char *)dst;
+	upsrc = (unsigned char *)src;
 	if (dst == src)
 		return (dst);
 	if (upsrc < updst)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: telron <telron@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 23:09:11 by copihendo         #+#    #+#             */
-/*   Updated: 2021/05/09 22:41:13 by telron           ###   ########.fr       */
+/*   Updated: 2021/05/10 22:30:47 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	ft_delete_lines(char **lines)
 	}
 }
 
-void ft_free_junk(t_base *base)
+void	ft_free_junk(t_base *base)
 {
 	free(base->junk.file);
 	free(base->junk.max_width);
@@ -42,11 +42,11 @@ static void	ft_free_image(t_base *base, t_image image)
 		mlx_destroy_image(base->mlx_ptr, image.link);
 }
 
-
 static void	ft_base_clear(t_base *base)
 {
 	ft_free_junk(base);
 	free(base->map.data);
+	free(base->strip);
 	ft_lstclear(&base->sprite, free);
 	ft_free_image(base, base->textures.screen);
 	ft_free_image(base, base->textures.ea);
@@ -57,7 +57,7 @@ static void	ft_base_clear(t_base *base)
 		mlx_destroy_window(base->mlx_ptr, base->mlx_win);
 }
 
-int			ft_exit(void *param, char *message)
+int	ft_exit(void *param, char *message)
 {
 	if (message)
 	{
@@ -67,12 +67,7 @@ int			ft_exit(void *param, char *message)
 	ft_base_clear(param);
 	ft_putendl_fd("Exit!", 1);
 	ft_bzero(param, sizeof(t_base));
-	sleep(12);
+	// sleep(12);
 	exit(0);
 	return (0);
 }
-// int ft_exit(t_base *base)
-// {
-// 	free(base->junk.file);
-// 	exit(0);
-// }

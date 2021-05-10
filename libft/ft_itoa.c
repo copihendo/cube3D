@@ -1,20 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/07 21:43:44 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/21 17:30:34 by mguadalu         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 
 static size_t	ft_dig_cap(long int n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (n < 0)
@@ -32,7 +20,7 @@ static size_t	ft_dig_cap(long int n)
 	return (i);
 }
 
-char			*ft_itoa(int k)
+char	*ft_itoa(int k)
 {
 	char		*arr;
 	int			i;

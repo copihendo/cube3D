@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 18:45:14 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/19 17:34:07 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:23:23 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	unsigned char	*upsrc;
 	size_t			i;
 
-	updst = (unsigned char*)dst;
-	upsrc = (unsigned char*)src;
+	updst = (unsigned char *)dst;
+	upsrc = (unsigned char *)src;
 	i = 0;
 	while (i < n)
 	{

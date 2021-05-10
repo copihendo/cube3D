@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 16:59:58 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/26 12:31:52 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:33:34 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > (ft_strlen(s) - start))
 		len = ft_strlen(s) - start;
-	if (!(arr = malloc(sizeof(char) * len + 1)))
+	arr = malloc(sizeof(char) * len + 1);
+	if (!arr)
 		return (NULL);
 	while (i != len && s[start])
 		arr[i++] = s[start++];

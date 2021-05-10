@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 15:11:35 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/19 13:47:22 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:18:04 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void	ft_bzero(void *dst, size_t n)
 	br = (char *)dst;
 	i = 0;
 	if (n != 0)
+	{	
 		while (n != 0)
 		{
 			*br = 0;
 			br++;
 			n--;
 		}
+	}
 }

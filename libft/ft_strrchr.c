@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 17:38:56 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/15 17:24:10 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:33:01 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strrchr(char *s, int c)
 {
-	char smb;
-	char *p;
+	char	smb;
+	char	*p;
 
 	p = 0;
 	smb = (char)c;

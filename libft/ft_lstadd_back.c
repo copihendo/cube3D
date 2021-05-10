@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 17:48:55 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/14 18:25:35 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:20:10 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *p;
+	t_list	*p;
 
 	if (!new || !lst)
 		return ;

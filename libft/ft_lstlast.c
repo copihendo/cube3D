@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 17:36:17 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/14 17:44:56 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:20:32 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list *last;
+	t_list	*last;
 
 	if (!lst)
 		return (NULL);

@@ -1,4 +1,4 @@
-#include "cube.h"
+/*#include "cube.h"
 
 
 int	ft_lst_cmp(t_sprite *sp1, t_sprite *sp2)
@@ -124,4 +124,4 @@ void	ft_render_sprite(t_base *base, t_strip *strip)
 		ft_render_std_sprite(base, strip, ptr->content);
 		ptr = ptr->next;
 	}
-}
+}*/

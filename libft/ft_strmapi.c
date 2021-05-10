@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 15:50:05 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/19 18:42:13 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:32:20 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (!s || !f)
 		return (NULL);
 	i = ft_strlen(s);
-	if (!(arr = (char *)malloc(i + 1)))
+	arr = (char *)malloc(i + 1);
+	if (!arr)
 		return (NULL);
 	arr[i] = '\0';
 	while (i--)

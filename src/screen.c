@@ -1,9 +1,9 @@
-#include "../includes/cube.h"
+#include "cube.h"
 
 void	ft_screen_header(t_base *base, int fd)
 {
-	char head[14];
-	int size;
+	char	head[14];
+	int		size;
 
 	ft_bzero(head, 14);
 	head[0] = 'B';
@@ -16,7 +16,8 @@ void	ft_screen_header(t_base *base, int fd)
 
 void	ft_screen_info(t_base *base, int fd)
 {
-	char info[40];
+	char	info[40];
+
 	ft_bzero(info, 40);
 	info[0] = 40;
 	ft_memmove(info + 4, &base->width_screen, 4);
@@ -28,17 +29,20 @@ void	ft_screen_info(t_base *base, int fd)
 
 void	ft_screen_img(t_base *base, int fd)
 {
-	int i;
+	int	i;
+
 	i = base->height_screen;
 	while (i > 0)
 	{
 		i--;
-		write(fd, base->textures.screen.data + base->width_screen * i, base->width_screen * 4);
+		write(fd, base->textures.screen.data \
+			+ base->width_screen * i, base->width_screen * 4);
 	}
 }
+
 void	ft_screenshot(t_base *base)
 {
-	int fd;
+	int	fd;
 
 	fd = open("Screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)

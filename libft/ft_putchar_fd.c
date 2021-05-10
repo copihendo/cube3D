@@ -6,7 +6,7 @@
 /*   By: mguadalu <mguadalu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 19:48:24 by mguadalu          #+#    #+#             */
-/*   Updated: 2020/11/14 20:30:23 by mguadalu         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:26:20 by mguadalu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	(void)write(fd, (void *)&c, (size_t)sizeof(c));
+	(void)write(fd, (void *)&c, 1);
 }
